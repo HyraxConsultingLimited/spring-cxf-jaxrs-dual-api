@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         metadata-complete="true">
+
+    <display-name>CXFMultiServletExample</display-name>
+    <description>How to have two JAX-RS APIs within one App using CXF</description>
+
+    <!--Shared Context Configuration-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/beans-shared.xml</param-value>
+    </context-param>
+
+    <!--Spring Context Loader-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!--Servlets-->
+    <servlet>
+        <servlet-name>InternalCXFServlet</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+        <init-param>
+            <param-name>config-location</param-name>
+            <param-value>/WEB-INF/beans-internal-api.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ExternalCXFServlet</servlet-name>
+        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+        <init-param>
+            <param-name>config-location</param-name>
+            <param-value>/WEB-INF/beans-external-api.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!--Servlet Mappings-->
+    <servlet-mapping>
+        <servlet-name>InternalCXFServlet</servlet-name>
+        <url-pattern>/internal/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ExternalCXFServlet</servlet-name>
+        <url-pattern>/external/*</url-pattern>
+    </servlet-mapping>
+
+
+    <!--Filters-->
+    <filter>
+        <filter-name>secureFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <!--Filter Mappings-->
+    <filter-mapping>
+        <filter-name>secureFilter</filter-name>
+        <servlet-name>InternalCXFServlet</servlet-name>
+    </filter-mapping>
+</web-app>
