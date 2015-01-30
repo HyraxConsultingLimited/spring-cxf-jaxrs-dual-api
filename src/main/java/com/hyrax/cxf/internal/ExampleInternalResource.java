@@ -8,7 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 @Service
-@Path("/avaliableInternally")
+@Path("/availableInternally")
 public class ExampleInternalResource {
 
     @Autowired

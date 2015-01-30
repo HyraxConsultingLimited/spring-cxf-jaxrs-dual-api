@@ -8,7 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 @Service
-@Path("/avaliableExternally")
+@Path("/availableExternally")
 public class ExampleExternalResource {
 
     @Autowired
