@@ -1,14 +1,14 @@
-An Example of a Spring CXF JAX-RS app that was two APIS. One public and one private.
+An example Spring, CXF, JAX-RS app that has two APIS loaded on different CXFServlets. One public and one private.
 ======================================================
 
 
 Key Features
 ------------
 
--    Spring Injection
--    JAX-RS
--    CXF
--    Dual API
+-   Spring Injection
+-   JAX-RS
+-   CXF
+-   Dual API
 
 
 Getting Started
